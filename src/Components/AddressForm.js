@@ -33,20 +33,20 @@ const AddressForm = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formValues),
       })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-        setFormValues({
-          name: '',
-          street: '',
-          city: '',
-          state: '',
-          zip: '',
-          country: '',
-        });
-        navigate('/order'); // Redirect to order status page
-      })
-      .catch((error) => console.error('Error:', error));
+        .then(response => response.json())
+        .then(data => {
+          console.log('Success:', data);
+          setFormValues({
+            name: '',
+            street: '',
+            city: '',
+            state: '',
+            zip: '',
+            country: '',
+          });
+          navigate('/order'); // Redirect to order status page
+        })
+        .catch((error) => console.error('Error:', error));
     } else {
       setErrors(newErrors);
     }
@@ -60,27 +60,27 @@ const AddressForm = () => {
 
   return (
     <Container maxWidth="sm"> {/* Container to limit the form's width and center it */}
-            <Typography variant="h4" gutterBottom>Shipping Address</Typography> {/* Form title */}
-            <form onSubmit={handleSubmit}> {/* Form submission handler */}
-                <Grid container spacing={2}> {/* Grid container to layout the form fields */}
-                    {Object.keys(formValues).map(field => (
-                        <Grid item xs={12} sm={field === 'zip' || field === 'country' ? 6 : 12} key={field}>
-                            <TextField
-                                fullWidth
-                                id={field}
-                                name={field}
-                                label={field.charAt(0).toUpperCase() + field.slice(1)} // Capitalize the first letter of the label
-                                value={formValues[field]} // Set the field value from state
-                                onChange={handleChange} // Handle changes to the input field
-                                error={!!errors[field]} // Show error styling if there's an error for this field
-                                helperText={errors[field]} // Display error message
-                            />
-                        </Grid>
-                    ))}
-                </Grid>
-                <Button className="mt-4" color="primary" variant="contained" type="submit" fullWidth>Submit</Button> {/* Submit button */}
-            </form>
-        </Container>
+      <Typography variant="h4" gutterBottom>Shipping Address</Typography> {/* Form title */}
+      <form onSubmit={handleSubmit}> {/* Form submission handler */}
+        <Grid container spacing={2}> {/* Grid container to layout the form fields */}
+          {Object.keys(formValues).map(field => (
+            <Grid item xs={12} sm={field === 'zip' || field === 'country' ? 6 : 12} key={field}>
+              <TextField
+                fullWidth
+                id={field}
+                name={field}
+                label={field.charAt(0).toUpperCase() + field.slice(1)} // Capitalize the first letter of the label
+                value={formValues[field]} // Set the field value from state
+                onChange={handleChange} // Handle changes to the input field
+                error={!!errors[field]} // Show error styling if there's an error for this field
+                helperText={errors[field]} // Display error message
+              />
+            </Grid>
+          ))}
+        </Grid>
+        <Button className="mt-2" color="primary" variant="contained" type="submit" fullWidth>Submit</Button> {/* Submit button */}
+      </form>
+    </Container>
   );
 };
 
